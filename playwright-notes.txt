@@ -1,0 +1,113 @@
+# Playwright JS/TS Automation Course Completed Sections:
+
+2) SECTION - 2 | Done
+3) SECTION - 3 | Done
+4) SECTION - 4 | Done
+5) SECTION - 5 | Started;
+6) SECTION - 6 | Soon;
+7) SECTION - 7 | Soon;
+8) SECTION - 8 | Soon;
+
+# Getting Started with Playwright
+
+Commands - 
+1) 'npm install playwright@latest - to install playwright 
+2) 'npm init playwright' - to create a playwright project environment
+3) 'npx playwright test' - to run playwright tests in headless mode
+4) 'npx playwright test --headed' - to run playwright tests in headed mode
+5) 'npx playwright show-report' - to show the last test run failure/success report
+6) 'npx playwright test --debug' - to debug the test & fix issues
+
+# Setup:
+- Language to choose JavaScript/TypeScript
+- Github - yes/no
+- Default folder name - tests/any other name
+- Files & Folders: package.json, playwright.config.js, tests/test.spec.js, node_modules
+- Imp Files: tests/your_testFile.js, playwright.config.js
+
+# Asynchronous JavaScript & Test Annotation Syntax:
+- Import test module from @playwright/test, call test('') method with the test_name, and cb_function
+- make the cb_function Asynchronous and use await in every code execution step 
+- Cause JavaScript is Asynchronous by default meaning that if you don't explicitly tells JavaScript to
+- wait for the process to be done before moving on to next line of code then JavaScript won't wait and
+- try to execute the next lines of code asynchronously. So make your test file code it synchronous.
+
+# Test Annotations & Test Methods;
+- test('Test Name', callbackFunction) 
+- test.only('Runs only This Test Case', callbackFunction)
+- 
+
+# Page Fixtures methods;
+- page.title() -> Get the current page/website title
+- page.goto() -> Visit the current page/website url
+- page.textContent() -> Get the text content of the selected element
+- page.isClosed() -> Returns true if the page got closed else false
+- page.pause() -> Pause the page before it gets closed & playwright inspector gets opened
+
+# Test Assertions;
+- expect(page).toHaveTitel(/subString/) -> Checks if the title is same as the passed /subString/
+- expect(page.locator('#id')).toContainText('Incorrect') -> Checks if the selected page element contains the text 'Incorrect'
+-
+
+# Web Page Elements Selectors;
+- Id Selectors - page.locator('#idName') or page.locator('input#idName')
+- Class Selectors - page.locator('.className') or page.locator('input.idName')
+- Attribute Selectors - page.locator('[attributeName="attributeValue"]') or page.locator('[class="btn cta-btn"]')
+- Traversing Parent to Child Selectors - (parenttagname or css selector space child css selector or tagname just like we do in css)
+page.locator('.card-body a') 
+- 
+
+# Locator API;
+- page.locator('#idName') - selects the page element with id = idName
+- page.locator('#idName').fill('username') - selects the page element with id = idName & fills the value in the input field
+- page.locator('#select-where').selectOptions('optionsValue') - selects the page element with id = select-where & selects the value for the dropdown OR radio Btns;
+- page.locator('input#remember_me').uncheck() - unchecks the checkbox with the id = remember_me
+- page.locator('input#remember_me').check() - checks the checkbox with the id = remember_me
+- page.locator('input#submit-btn').click() - clicks the submit button with the id = submit-btn
+- page.locator('h2').first() - selects the first element from elements list
+- page.locator('h2').last() - selects the last element from elements list
+- page.locator('h2').nth() - selects the nth element starting from 0 & pass in the nth method;
+- 
+
+# Waiting Methods;
+- page.waitForLoadState('load') -> wait for the load event to be fired.
+- page.waitForLoadState('domcontentloaded') -> wait for the DOMContentLoaded event to be fired.
+- page.waitForLoadState('networkidle') -> wait for all the network connections are loaded.
+- page.locator('#id').waitFor() - waits for the load event to be fired for the single element
+
+# Playwright Features;
+- Playwright needs to work with synchronous Javascript else things will get messed up with Playwright;
+- Playwright has feature called auto-waiting and it's applicable for only a very few selected methods and not for all the methods;
+- Playwright auto-waiting actions: visible, stable, receives events, enabled, editable
+- Playwright supports CSS Selectors, so you can select any elements using css selectors on the page;
+
+Summary:
+
+- JavaScript is Asynchronous by default so you need to explicitly make it synchronous using async await;
+- You can directly import browser, page, and other objects to work with from the playwright/test module.
+- Config file properties: testDir, timeout, expect {timeout}, use {browserName, headless}, reporter, 
+- Assertions is how you determine the failure and success of your test cases;
+- Locator API with css selectors like (#id, .class, [attribute], and text)
+- the methods like .check(), .uncheck(), .click(), .fill(), .textContent()
+- Playwright has feature called auto-waiting and it's applicable for only a very few selected methods
+- Await is requied only for performing the actions like .click(), .nth(), .fill() and not for selecting the elements ont the webpage.
+
+
+
+CSS Selectors/Locators & Type elements into page;
+
+1) If Id is present then CSS -> tagname#id or #id;
+2) If class attribute is present then CSS -> tagname.class or .class
+3) Write CSS on any attribute then CSS -> [attribute='value'] 
+4) 
+
+
+
+# Plugins: 
+
+1) Selectors Hub
+
+
+# Resources:
+
+1) [Playwright Cheatsheet PDF](https://ikalamtech.com/wp-content/uploads/2024/03/Playwright-CheatSheet_biggerFont-1.pdf?utm_source=chatgpt.com)
