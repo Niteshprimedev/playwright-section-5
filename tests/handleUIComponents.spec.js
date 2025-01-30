@@ -31,7 +31,7 @@ async function cbHandleUIDropdowns({ page }) {
 }
 
 // TC_02 Checkbox & Attribute Assertions
-test.only('sec-5 Checkbox & Attribute Assertions', cbHandleCheckboxes);
+test('sec-5 Checkbox & Attribute Assertions', cbHandleCheckboxes);
 
 async function cbHandleCheckboxes({ page }){
   // Visit the home page url or website;
@@ -65,6 +65,67 @@ async function cbHandleCheckboxes({ page }){
 
   console.log('Test Case 02 | UI Checkbox & Attribute Validation | is Successful');
 }
+
+// TC_03 Handle Multiple Pages and Window Tabs
+test.only('sec-5 Handle Multiple Pages & Windows', cbHandleMultiplePages);
+
+async function cbHandleMultiplePages({ browser }){
+    // Create a new Browser context;
+    const context = await browser.newContext();
+    const page = await context.newPage();
+
+    // Visit the page url or website
+    await page.goto('https://sso.teachable.com/secure/146684/identity/sign_up');
+
+    // Select the Privacy Policy page 
+   const privacyPolicyPageLinkEl = page.locator(`[aria-label="Code with Mosh's Privacy Policy"]`);
+
+  //  Listen for any new page window event & Visit the privacy policy page link; using Promise.all();
+  const [newPage] = await Promise.all([
+    context.waitForEvent('page'),
+    privacyPolicyPageLinkEl.click(),
+  ]);
+
+  const privacyPolicyTextEl = newPage.locator('.col-xs-10.col-xs-offset-1.col-md-8.col-md-offset-2.course-description p');
+
+  await privacyPolicyTextEl.nth(3).waitFor();
+
+  // Assertion;
+  expect(await privacyPolicyTextEl.nth(3)).toHaveText(`The School may collect and use Students’ personal identification information for the following purposes:`);
+
+  // Grab the School;
+  const privacyPolicyTxt = await privacyPolicyTextEl.nth(3).textContent();
+  const fullName = privacyPolicyTxt.split(' ')[1];
+
+  // Fill the full name in the Sign Up page;
+
+  // select the button element using the data-test-id selector;
+  const signUpBtnEl = page.locator('data-test-id=sign-up-with-otp');
+
+  await signUpBtnEl.click();
+
+  const fullNameEl = page.locator('#name');
+
+  await fullNameEl.fill(fullName);
+
+  await expect(fullNameEl).toHaveValue(fullName);
+
+  console.log('Test Case 03 | Handle Multiple Pages | is successful');
+
+  // Keeps the Browser open;
+  await new Promise(() => {});
+}
+
+// TC_04 Test Isolation for checking the code;
+test('Print Privacy Policy Text', async ({ page }) => {
+    await page.goto('https://members.codewithmosh.com/p/privacy');
+
+    const privacyPolicyTextEl = page.locator('.col-xs-10.col-xs-offset-1.col-md-8.col-md-offset-2.course-description p');
+
+    const privacyPolicyTxt = await privacyPolicyTextEl.nth(3).textContent();
+
+    console.log(privacyPolicyTxt);
+});
 
 
 console.log("Sec-5 Description: This test suite selects the dropdown and checkbox elements on the webpage and performs selection, checked, and unchecked actions as well as assertions.");

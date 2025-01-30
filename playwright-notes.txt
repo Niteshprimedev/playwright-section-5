@@ -80,6 +80,7 @@ page.locator('.card-body a')
 - Playwright has feature called auto-waiting and it's applicable for only a very few selected methods and not for all the methods;
 - Playwright auto-waiting actions: visible, stable, receives events, enabled, editable
 - Playwright supports CSS Selectors, so you can select any elements using css selectors on the page;
+- Playwright needs to know that you have opened multiple pages within the context by calling waitForEvent('page') event;
 
 Summary:
 
@@ -91,6 +92,7 @@ Summary:
 - the methods like .check(), .uncheck(), .click(), .fill(), .textContent()
 - Playwright has feature called auto-waiting and it's applicable for only a very few selected methods
 - Await is requied only for performing the actions like .click(), .nth(), .fill() and not for selecting the elements ont the webpage.
+- JavaScript promises are in three states: pending, rejected, fulfilled but to run promises parallely we use Promise.all();
 
 
 

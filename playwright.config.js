@@ -15,7 +15,7 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   testDir: './tests',
   /* Run tests in files in parallel */
-  timeout: 15 * 1000,
+  timeout: 30 * 1000,
   expect: {
     timeout: 5000,
   },
@@ -34,6 +34,10 @@ export default defineConfig({
     // baseURL: 'http://127.0.0.1:3000',
     browserName: "chromium",
     headless: false,
+    launchOptions: {
+      args: ['--start-maximized'],
+    },
+    viewport: null, // Ensures the viewport is not set, allowing full screen
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
